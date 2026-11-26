@@ -41,15 +41,14 @@
 <div><p>Llevo 22 años trabajando en el metal. He participado en proyectos en fábricas, refinerías y centrales eléctricas, tanto en Zaragoza como fuera.</p><p>Ahora trabajo por cuenta propia. Mi actividad principal es colaborar con empresas de montaje industrial que necesitan apoyo en soldadura de tubería. También atiendo encargos de particulares, desde fabricar una verja hasta recuperar una pieza dañada.</p></div>
 </div></section>
 <section class="content wrap" id="contacto"><div class="split">
-<div><p class="eyebrow">Contacto</p><h2>Cuéntame qué necesitas</h2><ol class="steps"><li>Indica qué hay que fabricar, montar o reparar.</li><li>Añade la ubicación, el plazo y las medidas si las tienes.</li><li>Ten preparadas fotos o planos para facilitar la valoración.</li></ol></div>
+<div><p class="eyebrow">Contacto</p><h2>Cuéntame qué necesitas</h2><ol class="steps"><li>Indica qué hay que fabricar, montar o reparar.</li><li>Añade la ubicación, el plazo y las medidas si las tienes.</li><li>Ten preparadas fotos o planos para facilitar la valoración.</li></ol><div class="actions"><a class="btn alt" href="https://wa.me/34625565327">WhatsApp · +34 625 56 53 27</a></div></div>
 <form id="consulta">
 <label for="tipo">Tipo de trabajo</label>
 <select id="tipo"><option>Tubería industrial</option><option>Fabricación metálica</option><option>Reparación metálica</option><option>Otro trabajo</option></select>
 <label for="detalle">Detalles del encargo</label>
 <textarea id="detalle" placeholder="Ubicación, plazo y descripción" required maxlength="2000"></textarea>
-<p>El canal de contacto está pendiente. Puedes preparar y copiar tu consulta.</p>
-<button class="btn" type="submit">Preparar consulta</button>
-<div class="result" id="resultado" hidden><label for="mensaje">Consulta preparada</label><textarea id="mensaje" readonly></textarea><button class="btn alt" id="copiar" type="button">Copiar consulta</button><p id="estado" role="status"></p></div>
+<p>Podrás revisar el mensaje en WhatsApp antes de enviarlo.</p>
+<button class="btn" type="submit">Continuar en WhatsApp</button>
 </form>
 </div></section>
 </main>
@@ -57,10 +56,6 @@
 <script>
 const consulta = document.querySelector('#consulta');
 const detalle = document.querySelector('#detalle');
-const mensaje = document.querySelector('#mensaje');
-const resultado = document.querySelector('#resultado');
-const estado = document.querySelector('#estado');
-
 detalle.addEventListener('input', () => detalle.setCustomValidity(''));
 consulta.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -71,21 +66,8 @@ consulta.addEventListener('submit', (event) => {
     return;
   }
   const tipo = document.querySelector('#tipo').value;
-  mensaje.value = `Hola, Alberto. Quería consultarte por un trabajo de soldadura.\n\nTipo de trabajo: ${tipo}\n\n${descripcion}`;
-  resultado.hidden = false;
-  estado.textContent = '';
-  mensaje.focus();
-});
-
-document.querySelector('#copiar').addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(mensaje.value);
-    estado.textContent = 'Consulta copiada.';
-  } catch {
-    mensaje.focus();
-    mensaje.select();
-    estado.textContent = 'Texto seleccionado. Puedes copiarlo manualmente.';
-  }
+  const mensaje = `Hola, Alberto. Quería consultarte por un trabajo de soldadura.\n\nTipo de trabajo: ${tipo}\n\n${descripcion}`;
+  window.location.assign('https://wa.me/34625565327?text=' + encodeURIComponent(mensaje));
 });
 </script>
 </body>
